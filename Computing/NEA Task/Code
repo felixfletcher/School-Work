@@ -13,16 +13,18 @@ def login():
 
 def signup():
     print("You are now going to sign up")
-    name=input("Please enter your first name:  ")
+    name=str(input("Please enter your first name:  "))
     creds.append(name)
-    print(creds[0])
     DOB=int(input("Please enter your birth date in the form DDMMYYY:  "))
     str(DOB)
     while len(str(DOB))<8:
         print("Your DOB is not valid, please re-enter it")
         DOB=int(input("Please enter your birth date in the form DDMMYYY:  "))
+    creds.append(DOB)
     user=input("Please enter the username that you want to be known as, this will be visable to everyone:  ")
+    creds.append(user)
     password()
+    
 
 def password():
     psword=str(input("Please enter a password that contains at least one capital letter and one number and be at least 6 characters long:  ")) 
@@ -40,6 +42,12 @@ def password():
         time.sleep(2)
         password()
     print("thank you")
+    creds.append(psword)
+
+    with open('userDetails.csv', 'w', newline='') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=' ',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        spamwriter.writerow(creds)
     
 def initialLogin():
     print("Welcome to Netflix")
