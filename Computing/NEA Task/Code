@@ -8,6 +8,8 @@ def isNumThere(s):
 
 def login():
     print("hello")
+    loginUser=input("Please enter your username:  ")
+    loginPassword=input("Please enter your password:  ")
 
   
 
@@ -29,22 +31,22 @@ def signup():
 def password():
     psword=str(input("Please enter a password that contains at least one capital letter and one number and be at least 6 characters long:  ")) 
     booleanNumThere = isNumThere(psword)
-    if booleanNumThere == False:
+    while booleanNumThere == False:
         print("There is no number in your password please try again")
         time.sleep(2)
-        password()
-    if psword.islower():
+        psword=str(input("Please enter a password that contains at least one capital letter and one number and be at least 6 characters long:  "))
+    while psword.islower():
         print("Your Password must have at least 1 capital letter, please try again")
         time.sleep(2)
-        password()
-    if len(psword)<6:
+        psword=str(input("Please enter a password that contains at least one capital letter and one number and be at least 6 characters long:  "))
+    while len(psword)<6:
         print("Your password isn't 6 characters long, please try again")
         time.sleep(2)
-        password()
+        psword=str(input("Please enter a password that contains at least one capital letter and one number and be at least 6 characters long:  "))
     print("thank you")
     creds.append(psword)
 
-    with open('userDetails.csv', 'w', newline='') as csvfile:
+    with open('userDetails.csv', 'a', newline='') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=' ',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
         spamwriter.writerow(creds)
@@ -64,6 +66,5 @@ def initialLogin():
         print("That is not a valid option, please try again")
         time.sleep(2)
         initialLogin()
-
 
 initialLogin()
